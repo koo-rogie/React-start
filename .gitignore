@@ -1,5 +1,50 @@
-# Created by https://www.toptal.com/developers/gitignore/api/node,windows,osx,visualstudiocode
-# Edit at https://www.toptal.com/developers/gitignore?templates=node,windows,osx,visualstudiocode
+# Created by https://www.toptal.com/developers/gitignore/api/node,visualstudiocode,windows,macos
+# Edit at https://www.toptal.com/developers/gitignore?templates=node,visualstudiocode,windows,macos
+
+# 선생님 파일 업로드 제외용
+sample 
+workspace-ins
+README-save.md
+
+# 내 git wiki 업로드 제외용
+wiki**.md
+
+# code runner 업로드 제외용
+tempCode**.js
+
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+### macOS Patch ###
+# iCloud generated files
+*.icloud
 
 ### Node ###
 # Logs
@@ -77,7 +122,7 @@ web_modules/
 .yarn-integrity
 
 # dotenv environment variable files
-# .env
+.env
 .env.development.local
 .env.test.local
 .env.production.local
@@ -141,35 +186,6 @@ dist
 # SvelteKit build / generate output
 .svelte-kit
 
-### OSX ###
-# General
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Icon must end with two \r
-Icon
-
-
-# Thumbnails
-._*
-
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
-
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
@@ -215,4 +231,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/node,windows,osx,visualstudiocode
+# End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode,windows,macos
