@@ -1,0 +1,5 @@
+{
+  "files.readonlyInclude": {
+    "**/sample/**": true
+  }
+}
