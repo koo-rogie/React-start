@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List App</title>
+    <link rel="icon" href="../../../assets/favicon.ico" type="image/x-icon" />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        text-align: center;
+      }
+      body {
+        background-color: gray;
+        color: #eee;
+      }
+
+      #container > ul {
+        border: 1px solid black;
+      }
+      .todolist {
+        li {
+          span {
+            &:first-child {
+              display: inline-block;
+              width: 2rem;
+            }
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="todo">
+      <header>
+        <h1>Todo List - 03 수정 🙂</h1>
+        <p>파일 경로: <span id="filepath"></span></p>
+      </header>
+      <div id="main">
+        <div id="container">
+          <ul>
+            <li>
+              <h2>할일 목록</h2>
+              <div class="todoinput">
+                <input type="text" onkeydown="handleAddKeydown(event)" autofocus />
+                <button type="button" onclick="handleAdd()">추가</button>
+              </div>
+              <ul class="todolist">
+                <li data-num="1">
+                  <span>1</span>
+                  <span onclick="toggleDone(1)"><s>샘플1</s></span>
+                  <button type="button" onclick="deleteItem(1)">삭제</button>
+                </li>
+                <li data-num="2">
+                  <span>2</span>
+                  <span onclick="toggleDone(2)">샘플2</span>
+                  <button type="button" onclick="deleteItem(2)">삭제</button>
+                </li>
+                <li data-num="3">
+                  <span>3</span>
+                  <span onclick="toggleDone(3)">샘플3</span>
+                  <button type="button" onclick="deleteItem(3)">삭제</button>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <footer>
+        <p>멋쟁이 사자처럼 FrontEnd BootCamp</p>
+      </footer>
+    </div>
+
+    <script>
+      // location.href: http://localhost:8800/workspace-ins/ch01-buildup/todolist/sample/
+      // location.href.split('/ch'): ['http://localhost:8800/workspace-ins', '01-buildup/todolist/sample/']
+      // ch01-buildup/todolist/sample/index.html
+      document.querySelector("#filepath").textContent = `ch${location.href.split("/ch")[1]}index.html`;
+    </script>
+
+    <script src="./index.js"></script>
+  </body>
+</html>
