@@ -1,23 +1,19 @@
 @charset "utf-8";
 @font-face {
-    font-family: 'Noto Sans Regular';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Noto Sans Regular'), local('NotoSans-Regular'),
-    url('font/eot/NotoSansKR-Regular-Hestia.eot'),
-    url('font/eot/NotoSansKR-Regular-Hestia.eot?#iefix') format('embedded-opentype'),
-    url('font/woff/NotoSansKR-Regular-Hestia.woff') format('woff'),
-    url('font/otf/NotoSansKR-Regular-Hestia.otf') format('opentype');
+  font-family: "Noto Sans Regular";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Noto Sans Regular"), local("NotoSans-Regular"), url("font/eot/NotoSansKR-Regular-Hestia.eot"),
+    url("font/eot/NotoSansKR-Regular-Hestia.eot?#iefix") format("embedded-opentype"), url("font/woff/NotoSansKR-Regular-Hestia.woff") format("woff"),
+    url("font/otf/NotoSansKR-Regular-Hestia.otf") format("opentype");
 }
 @font-face {
-    font-family: 'Noto Sans Bold';
-    font-style: normal;
-    font-weight: 700;
-    src: local('Noto Sans Bold'), local('NotoSans-Bold'),
-    url('font/eot/NotoSansKR-Bold-Hestia.eot'),
-    url('font/eot/NotoSansKR-Bold-Hestia.eot?#iefix') format('embedded-opentype'),
-    url('font/woff/NotoSansKR-Bold-Hestia.woff') format('woff'),
-    url('font/otf/NotoSansKR-Bold-Hestia.otf') format('opentype');
+  font-family: "Noto Sans Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: local("Noto Sans Bold"), local("NotoSans-Bold"), url("font/eot/NotoSansKR-Bold-Hestia.eot"),
+    url("font/eot/NotoSansKR-Bold-Hestia.eot?#iefix") format("embedded-opentype"), url("font/woff/NotoSansKR-Bold-Hestia.woff") format("woff"),
+    url("font/otf/NotoSansKR-Bold-Hestia.otf") format("opentype");
 }
 html {
   font-size: 10px;
@@ -33,7 +29,7 @@ body {
   color: #fff;
   background-color: #434343;
   font-size: 1.4rem;
-  font-family: 'Noto Sans Regular', 'Sans-serif';
+  font-family: "Noto Sans Regular", "Sans-serif";
   line-height: 1.6;
 }
 
@@ -53,6 +49,9 @@ ul {
   margin: 0;
 }
 
+section > ul > li {
+  margin-top: 10px;
+}
 .container {
   width: 100%;
 }
@@ -67,8 +66,7 @@ ul {
 .example-title {
   margin: 1rem;
   font-size: 2rem;
-  font-family: 'Noto Sans Bold';
-    
+  font-family: "Noto Sans Bold";
 }
 
 .chapter {
@@ -77,15 +75,15 @@ ul {
   margin: 1rem auto;
   border: 2px solid #222;
   float: left;
-  background: #fff!important;
+  background: #fff !important;
   color: #000;
   position: relative;
-  height: auto!important;
+  height: auto !important;
   overflow: hidden;
   border-radius: 0.5rem;
 }
 
-.chapter-open .paragraph{
+.chapter-open .paragraph {
   display: block;
 }
 
@@ -97,7 +95,7 @@ ul {
   margin: 0;
   padding: 0.5rem 2rem;
   background-color: #243949;
-  font-family: 'Noto Sans Bold';
+  font-family: "Noto Sans Bold";
   color: #fff;
 }
 
@@ -127,11 +125,11 @@ ul {
 }
 
 .chapter-open button {
-  top: 1.5rem!important;
-  border-top: 0.5rem solid #fff!important;
-  border-left: 0.5rem solid #fff!important;
-  border-right: 0.5rem solid transparent!important;
-  border-bottom: 0.5rem solid transparent!important;
+  top: 1.5rem !important;
+  border-top: 0.5rem solid #fff !important;
+  border-left: 0.5rem solid #fff !important;
+  border-right: 0.5rem solid transparent !important;
+  border-bottom: 0.5rem solid transparent !important;
 }
 
 .chapter-open button:focus {

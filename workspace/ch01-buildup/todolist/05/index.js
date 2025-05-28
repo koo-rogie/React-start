@@ -7,21 +7,27 @@ const itemList = [
 
 let lastNum = itemList.length;
 
-// ul 요소 꺼내기
-const itemListElem = document.querySelector(".todolist");
+// itemList 배열을 이용해서 화면을 렌더링한다
+function render() {
+  // ul 요소 꺼내기
+  const itemListElem = document.querySelector(".todolist");
+  
+  // 기존 목록 삭제
+  while (itemListElem.firstChild) {
+    // 첫번째 자식이 없을때까지 무한루프됨
+    // ! 파일 다 만들고 저장하기
+    itemListElem.firstChild.remove();
+  }
 
-// 기존 목록 삭제
-while (itemListElem.firstChild) {
-  // 첫번째 자식이 없을때까지 무한루프됨
-  // ! 파일 다 만들고 저장하기
-  itemListElem.firstChild.remove();
+  // itemList 배열의 각 Todo 아이템을 화면에 추가
+  itemList.forEach((item, index) => {
+    const liElem = getTodoItemElem(item);
+    itemListElem.appendChild(liElem);
+  });
 }
 
-// itemList 배열의 각 Todo 아이템을 화면에 추가
-itemList.forEach((item, index) => {
-  const liElem = getTodoItemElem(item);
-  itemListElem.appendChild(liElem);
-});
+// 데이터를 기반으로 화면 갱신
+render();
 
 // 한건의 Todo 객체를 받아서 DOM 객체로 만들어 반환
 function getTodoItemElem(item) {
@@ -75,9 +81,8 @@ function addItem(title) {
 
   itemList.push(item);
 
-  // 화면 갱신, item을 DOM 객체로 만들어 ul 요소에 자식으로 추가
-  const newItemElem = getTodoItemElem(item);
-  itemListElem.appendChild(newItemElem);
+  // 데이터를 기반으로 화면 갱신
+  render();
 }
 
 // 추가 버튼 클릭 이벤트 핸들러
@@ -120,23 +125,28 @@ function toggleDone(num) {
   selectedItem.done = !selectedItem.done;
 
   // 화면 갱신, done 값에 따라서 <s> 추가 또는 삭제
-  const targetLi = document.querySelector(`.todolist > li[data-num="${num}"]`);
-  const titleSpan = targetLi.children[1];
-
-  if (selectedItem.done) {
-    const sElem = document.createElement("s");
-    sElem.appendChild(titleSpan.firstChild);
-    titleSpan.appendChild(sElem);
-  } else {
-    titleSpan.appendChild(titleSpan.firstChild.lastChild);
-    titleSpan.firstChild.remove();
-  }
+  // 데이터를 기반으로 화면 갱신
+  render();
 }
 
 // 할일 삭제
 function deleteItem(num) {
   console.log(num, "할일 삭제");
+  /* 1안*/
   // 데이터 갱신, itemList에서 num에 해당하는 item 삭제
+  // const targetLi = document.querySelector(`.todolist > li[data-num="${num}"]`);
 
   // 화면 갱신, 화면에서 num에 해당하는 item 제거
+  // if (targetLi) {
+  //   targetLi.remove();
+  // }
+
+  /* 2안 */
+  const index = itemList.findIndex((item) => item.num === num);
+
+  if (index !== -1) {
+    itemList.splice(index, 1);
+  }
+  // 데이터를 기반으로 화면 갱신
+  render();
 }

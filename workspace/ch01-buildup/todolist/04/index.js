@@ -136,7 +136,21 @@ function toggleDone(num) {
 // 할일 삭제
 function deleteItem(num) {
   console.log(num, "할일 삭제");
+  /* 1안*/
   // 데이터 갱신, itemList에서 num에 해당하는 item 삭제
+  // const targetLi = document.querySelector(`.todolist > li[data-num="${num}"]`);
 
   // 화면 갱신, 화면에서 num에 해당하는 item 제거
+  // if (targetLi) {
+  //   targetLi.remove();
+  // }
+
+  /* 2안 */
+  const index = itemList.findIndex((item) => item.num === num);
+
+  if (index !== -1) {
+    itemList.splice(index, 1);
+  }
+
+  document.querySelector(`.todolist > li[data-num="${num}"]`).remove();
 }
