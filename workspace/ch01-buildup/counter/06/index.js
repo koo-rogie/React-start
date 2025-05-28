@@ -14,7 +14,7 @@ function Header() {
   );
 }
 
-function counter() {
+function Counter() {
   let count = 0;
 
   // 카운터 감소
@@ -52,7 +52,7 @@ function counter() {
 }
 
 function App() {
-  return Reaction.createElement("div", { id: "app" }, Header, counter);
+  return Reaction.createElement("div", { id: "app" }, Header, Counter);
 }
 
 // root 요소에 app 추가
