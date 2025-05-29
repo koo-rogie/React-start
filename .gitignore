@@ -2,7 +2,6 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,visualstudiocode,windows,macos
 
 # 선생님 파일 업로드 제외용
-sample 
 workspace-ins
 README-save.md
 
