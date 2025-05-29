@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counter</title>
+    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: gray;
+        color: #eee;
+      }
+      #root {
+        width: 50rem;
+        margin: 0 auto;
+      }
+      #counter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: .625rem;
+        button {
+          display: block;
+          width: 32%;
+        }
+        span {
+          &::before {
+            content: "최종결과: ";
+          }
+        }
+      }
+    </style>
+    <script type="module" src="./index.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

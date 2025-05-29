@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List App</title>
+    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
+    <script type="module" src="./index.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: gray;
+        color: #eee;
+      }
+      ul {
+        list-style: none;
+      }
+      #root {
+        width: 50rem;
+        margin: 0 auto;
+      }
+      #counter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 0.625rem;
+        button {
+          display: block;
+          width: 32%;
+        }
+        span {
+          &::before {
+            content: "최종결과: ";
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
