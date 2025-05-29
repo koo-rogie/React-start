@@ -19,11 +19,23 @@ function Header() {
     Reaction.createElement("h1", null, "Todo List - 08 상태(데이터) 변경시 화면 리렌더링"),
     Reaction.createElement("p", null, "파일 경로: ", Reaction.createElement("span", { id: "filepath" }, `ch${location.href.split("/ch")[1]}index.html`))
   );
+  /*
+  <header>
+    <h1>Todo List - 08 상태(데이터) 변경시 화면 리렌더링</h1>
+    <p>파일 경로: <span id="filepath">ch${location.href.split("/ch")[1]}index.html</span></p>
+  </header>
+  */
 }
 
 // 푸터 컴포넌트를 렌더링합니다.
 function Footer() {
   return Reaction.createElement("footer", null, Reaction.createElement("p", null, "멋쟁이 사자처럼 FrontEnd BootCamp"));
+
+  /*
+  <footer>
+    <p>멋쟁이 사자처럼 FrontEnd BootCamp</p>
+  </footer>
+  */
 }
 
 /**
@@ -39,6 +51,15 @@ function TodoItem({ item }) {
     Reaction.createElement("span", null, Reaction.createElement("s", null, item.title)),
     Reaction.createElement("button", { type: "button" }, "삭제")
   );
+
+  /*
+  num="1", title="가나다" 일때
+    <li data-num="1">
+      <span>1</span>
+      <span>가나다</span>
+      <button type="button">삭제</button>
+    </li>
+  */
 }
 
 /**
@@ -59,6 +80,14 @@ function TodoInput(props) {
     }),
     Reaction.createElement("button", { type: "button", onclick: props.handleAdd }, "추가")
   );
+
+  /*
+  <div class="todoinput">
+    <input type="text" autofocus="true">
+    <button type="button">추가</button>
+  </div>
+  
+  */
 }
 
 /**
@@ -69,6 +98,9 @@ function TodoInput(props) {
 function TodoList({ itemList }) {
   const items = itemList.map((item) => TodoItem({ item }));
   return Reaction.createElement("ul", { class: "todolist" }, items);
+  /*
+  <ul class="todolist">`${items}`</ul>
+  */
 }
 
 /**
@@ -86,6 +118,14 @@ function Todo(props) {
       Reaction.createElement("ul", null, Reaction.createElement("li", null, Reaction.createElement("h2", null, "할일 목록"), TodoInput(props), TodoList(props)))
     )
   );
+  /*
+  <div id="main">
+    <div id="container">
+      ${TodoInput}
+      ${TodoList}
+    </div>
+  </div>
+  */
 }
 
 // App 컴포넌트
@@ -191,6 +231,13 @@ function App() {
   }
 
   return Reaction.createElement("div", { id: "todo" }, Header, Todo({ handleAdd, handleAddKeydown, itemList, addItem, toggleDone, deleteItem }), Footer);
+  /*
+  <div id="todo">
+    ${Header}
+    ${Todo}  
+    ${Footer}
+  </div>
+  */
 }
 
 Reaction.createRoot(document.querySelector("#root")).render(App);
