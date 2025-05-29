@@ -11,29 +11,42 @@ const Reaction = {
    * @returns {HTMLElement} 생성된 요소
    */
   createElement: (tag, props, ...children) => {
+    // 주어진 태그 이름으로 요소 생성
     const elem = document.createElement(tag);
+
+    // 속성을 추가하기 위한 코드
     if (props) {
       for (const attrName in props) {
         const value = props[attrName];
         if (attrName.toLowerCase().startsWith("on")) {
-          // on으로 시작하는 속성을 추가 하기 위한 코드
+          // on으로 시작하는 속성을 체크하기 위한 if문
+          // ex) onClick, onkeyDown
           elem.addEventListener(attrName.toLowerCase().substring(2), value);
+          // ex) elem.addEventListener("click", handleClick);
         } else {
           elem.setAttribute(attrName, value);
+          // ex) elem.setAttribute("id", "root");
         }
       }
     }
-    // 자식 노드 추가
+    // 텍스트 노드 추가
     for (let child of children) {
       if (typeof child === "string" || typeof child === "number") {
+        // child의 type이 문자, 숫자이면
         child = document.createTextNode(child);
+        // ex) 문자열 child = document.createTextNode("abc");
+        // ex) 숫자 child = document.createTextNode(13);
       } else if (typeof child === "function") {
+        // child의 type이 함수라면 실행해라
         child = child();
+        // ex) 숫자 child = child() ;
       }
 
       if (Array.isArray(child)) {
+        // child의 type이 배열이면
         child.forEach((c) => elem.appendChild(c));
       } else {
+        // 이 외의 경우 자식으로 추가함
         elem.appendChild(child);
       }
     }
@@ -47,7 +60,8 @@ const Reaction = {
    * @returns {{ render: function }} 렌더링 메서드를 포함한 객체
    */
   createRoot: (rootNode) => {
-    let _appComponent;
+    let _appComponent; // 외부에서 접근 못하도록 막는 코드
+
     return (_root = {
       // 루트 노드 하위에서 지정한 함수를 실행해서 받은 컴포넌트를 렌더링 한다.
       render(appFn) {
@@ -96,9 +110,3 @@ const Reaction = {
   },
 };
 export default Reaction;
-
-/*
-useState(10) // 초기값 10
-setValue(20) // 20으로 수정됨
-useState(50) // 50으로 수정되지 않고 20으로 유지됨
-*/
