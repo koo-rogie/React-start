@@ -68,6 +68,28 @@ function TodoItem({ item }) {
  * @returns {HTMLElement} 입력 폼 요소
  */
 function TodoInput(props) {
+  // 추가 버튼 클릭 이벤트 핸들러
+  const handleAdd = () => {
+    console.log("추가 버튼 클릭");
+    const inputElem = document.querySelector(".todoinput > input");
+    if (inputElem.value.trim() !== "") {
+      props.addItem(inputElem.value.trim());
+      inputElem.value = "";
+      inputElem.focus();
+    }
+  };
+
+  /**
+   * 엔터 키 입력 시 추가 동작을 실행합니다.
+   * @param {KeyboardEvent} event - 키보드 이벤트 객체
+   */
+  const handleAddKeydown = (event) => {
+    console.log("keydown", event);
+    if (event.key === "Enter") {
+      handleAdd();
+    }
+  };
+
   return Reaction.createElement(
     "div",
     { class: "todoinput" },
@@ -75,10 +97,10 @@ function TodoInput(props) {
       type: "text",
       autofocus: true,
       onkeydown: (e) => {
-        props.handleAddKeydown(e);
+        handleAddKeydown(e);
       },
     }),
-    Reaction.createElement("button", { type: "button", onclick: props.handleAdd }, "추가")
+    Reaction.createElement("button", { type: "button", onclick: handleAdd }, "추가")
   );
 
   /*
@@ -147,41 +169,23 @@ function App() {
    */
   function addItem(title) {
     console.log("할일 추가");
+    /* 1안
     const newItemList = [...itemList];
     // 데이터 갱신, itemList에 item 추가
     // num, title, done 속성을 가진 item 객체 생성
+    
+    newItemList.push(item);
+    
+    setItemList(newItemList);
+    */
     const item = {
       num: ++lastNum,
       title,
       done: false,
     };
-
-    newItemList.push(item);
-
-    setItemList(newItemList);
+    setItemList([...itemList, item]); // 기존의 배열 스프래드 하기
+    // 기존에 있었던 것과 새로운 객체를 배열로 만들기
   }
-
-  // 추가 버튼 클릭 이벤트 핸들러
-  const handleAdd = () => {
-    console.log("추가 버튼 클릭");
-    const inputElem = document.querySelector(".todoinput > input");
-    if (inputElem.value.trim() !== "") {
-      addItem(inputElem.value.trim());
-      inputElem.value = "";
-      inputElem.focus();
-    }
-  };
-
-  /**
-   * 엔터 키 입력 시 추가 동작을 실행합니다.
-   * @param {KeyboardEvent} event - 키보드 이벤트 객체
-   */
-  const handleAddKeydown = (event) => {
-    console.log("keydown", event);
-    if (event.key === "Enter") {
-      handleAdd();
-    }
-  };
 
   /**
    * 할일 항목의 완료 상태를 토글합니다.
@@ -230,7 +234,7 @@ function App() {
     }
   }
 
-  return Reaction.createElement("div", { id: "todo" }, Header, Todo({ handleAdd, handleAddKeydown, itemList, addItem, toggleDone, deleteItem }), Footer);
+  return Reaction.createElement("div", { id: "todo" }, Header, Todo({ itemList, addItem, toggleDone, deleteItem }), Footer);
   /*
   <div id="todo">
     ${Header}
