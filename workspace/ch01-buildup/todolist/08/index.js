@@ -186,7 +186,7 @@ function App() {
     setItemList(newItemList);
     */
     const item = {
-      num: itemList[itemList.length - 1].num + 1,
+      num: itemList[itemList.length - 1]?.num + 1 || 1,
       title,
       done: false,
     };
