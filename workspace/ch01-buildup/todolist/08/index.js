@@ -43,13 +43,20 @@ function Footer() {
  * @param {{ item: { num: number, title: string, done: boolean } }} param0 - 렌더링할 아이템 정보
  * @returns {HTMLElement} 리스트 아이템 요소
  */
-function TodoItem({ item }) {
+function TodoItem({ item, toggleDone, deleteItem }) {
   return Reaction.createElement(
     "li",
     { "data-num": item.num },
     Reaction.createElement("span", null, item.num),
-    Reaction.createElement("span", null, Reaction.createElement("s", null, item.title)),
-    Reaction.createElement("button", { type: "button" }, "삭제")
+    Reaction.createElement("span", { onclick: () => toggleDone(item.num) }, item.done ? Reaction.createElement("s", null, item.title) : item.title),
+    Reaction.createElement(
+      "button",
+      {
+        type: "button",
+        onclick: () => deleteItem(item.num),
+      },
+      "삭제"
+    )
   );
 
   /*
@@ -59,6 +66,19 @@ function TodoItem({ item }) {
       <span>가나다</span>
       <button type="button">삭제</button>
     </li>
+  */
+}
+
+/**
+ * TodoList 컴포넌트를 생성합니다.
+ * @param {{ itemList: { num: number, title: string, done: boolean }[] }} param0 - 아이템 배열
+ * @returns {HTMLElement} 리스트 요소
+ */
+function TodoList({ itemList, toggleDone, deleteItem }) {
+  const items = itemList.map((item) => TodoItem({ item, toggleDone, deleteItem }));
+  return Reaction.createElement("ul", { class: "todolist" }, items);
+  /*
+  <ul class="todolist">`${items}`</ul>
   */
 }
 
@@ -109,19 +129,6 @@ function TodoInput(props) {
     <button type="button">추가</button>
   </div>
   
-  */
-}
-
-/**
- * TodoList 컴포넌트를 생성합니다.
- * @param {{ itemList: { num: number, title: string, done: boolean }[] }} param0 - 아이템 배열
- * @returns {HTMLElement} 리스트 요소
- */
-function TodoList({ itemList }) {
-  const items = itemList.map((item) => TodoItem({ item }));
-  return Reaction.createElement("ul", { class: "todolist" }, items);
-  /*
-  <ul class="todolist">`${items}`</ul>
   */
 }
 
@@ -179,7 +186,7 @@ function App() {
     setItemList(newItemList);
     */
     const item = {
-      num: ++lastNum,
+      num: itemList[itemList.length - 1].num + 1,
       title,
       done: false,
     };
@@ -195,22 +202,28 @@ function App() {
     console.log(num, "완료/미완료");
     // 데이터 갱신, itemList에서 num에 해당하는 item의 done 값을 수정
     // itemList에서 num 값으로 item 조회
-    /* 1안 */
-    // let selectedItem;
-    // itemList.forEach((item) => {
-    //   if (item.num === num) {
-    //     selectedItem = item;
-    //   }
-    // });
+    /* 1안 
+    let selectedItem;
+    itemList.forEach((item) => {
+    if (item.num === num) {
+      selectedItem = item;
+    }
+    });
+    */
 
-    /* 2안 */
+    /* 2안
     const selectedItem = itemList.find((item) => item.num === num);
-
+    
     console.log("선택된 li", selectedItem);
     // item의 done 값을 수정
     selectedItem.done = !selectedItem.done;
+    */
 
-    setItemList([...itemList]);
+    /* 3안 */
+    const newItemList = itemList.map((item) => {
+      return item.num === num ? { ...item, done: !item.done } : item;
+    });
+    setItemList(newItemList);
   }
 
   /**
@@ -219,21 +232,27 @@ function App() {
    */
   function deleteItem(num) {
     console.log(num, "할일 삭제");
-    /* 1안*/
+    /* 1안
     // 데이터 갱신, itemList에서 num에 해당하는 item 삭제
-    // const targetLi = document.querySelector(`.todolist > li[data-num="${num}"]`);
+    const targetLi = document.querySelector(`.todolist > li[data-num="${num}"]`);
+    
+    화면 갱신, 화면에서 num에 해당하는 item 제거
+    if (targetLi) {
+        targetLi.remove();
+      }
+    */
 
-    // 화면 갱신, 화면에서 num에 해당하는 item 제거
-    // if (targetLi) {
-    //   targetLi.remove();
-    // }
-
-    /* 2안 */
+    /* 2안
     const index = itemList.findIndex((item) => item.num === num);
-
+    
     if (index !== -1) {
       itemList.splice(index, 1);
     }
+    */
+
+    /*3안*/
+    const newItemList = itemList.filter((item) => item.num !== num);
+    setItemList(newItemList);
   }
 
   return Reaction.createElement("div", { id: "todo" }, Header, Todo({ itemList, addItem, toggleDone, deleteItem }), Footer);
