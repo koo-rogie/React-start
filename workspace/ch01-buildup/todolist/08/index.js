@@ -209,6 +209,8 @@ function App() {
     console.log("선택된 li", selectedItem);
     // item의 done 값을 수정
     selectedItem.done = !selectedItem.done;
+
+    setItemList([...itemList]);
   }
 
   /**
