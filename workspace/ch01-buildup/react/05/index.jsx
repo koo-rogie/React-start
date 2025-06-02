@@ -105,7 +105,6 @@ function Todo() {
     //객체의 불변성을 위해서, 기존의 객체는 수정되지 않도록
     const newItemList = itemList.map((item) => (item.num === num ? { ...item, done: !item.done } : item));
     setItemList(newItemList);
-
   }
 
   // 할일 삭제
