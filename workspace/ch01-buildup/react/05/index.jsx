@@ -58,19 +58,21 @@ function TodoInput({ addItem }) {
   );
 }
 
-function TodoItem({ item }) {
+function TodoItem({ item, deleteItem, toggleDone }) {
   return (
     <li>
       <span>{item.num}</span>
-      <span>{item.done ? <s>{item.title}</s> : item.title}</span>
-      <button type="button">삭제</button>
+      <span onClick={() => toggleDone(item.num)}>{item.done ? <s>{item.title}</s> : item.title}</span>
+      <button type="button" onClick={() => deleteItem(item.num)}>
+        삭제
+      </button>
     </li>
   );
 }
 
-function TodoList({ itemList }) {
+function TodoList({ itemList, toggleDone, deleteItem }) {
   const item = itemList.map((item) => {
-    return <TodoItem key={item.num} item={item} />;
+    return <TodoItem key={item.num} item={item} toggleDone={toggleDone} deleteItem={deleteItem} />;
   });
   return <ul className="todolist">{item}</ul>;
 }
@@ -86,40 +88,31 @@ function Todo() {
   // 상태관리
   // 상태가 수정되면 화면이 리렌더링되는 리엑트
   const [itemList, setItemList] = React.useState(initItemList);
-  let lastNum = itemList.length;
 
   // 할일 추가
   function addItem(title) {
     console.log("할일 추가");
     // 데이터 갱신, itemList에 item 추가
     // num, title, done 속성을 가진 item 객체 생성
-    const item = { num: ++lastNum, title, done: false };
+    const item = { num: itemList[itemList.length - 1]?.num + 1 || 1, title, done: false };
     setItemList([...itemList, item]);
   }
 
-  // 완료/미완료 처리A
+  // 완료/미완료 처리
   function toggleDone(num) {
     console.log(num, "완료/미완료");
     // 데이터 갱신, itemList에서 num에 해당하는 item의 done 값을 수정
-    const selectedItem = itemList.find((item) => item.num === num);
+    //객체의 불변성을 위해서, 기존의 객체는 수정되지 않도록
+    const newItemList = itemList.map((item) => (item.num === num ? { ...item, done: !item.done } : item));
+    setItemList(newItemList);
 
-    console.log("선택된 li", selectedItem);
-    // item의 done 값을 수정
-    selectedItem.done = !selectedItem.done;
-
-    // 화면 갱신, done 값에 따라서 <s> 추가 또는 삭제
   }
 
   // 할일 삭제
   function deleteItem(num) {
     console.log(num, "할일 삭제");
-    /* 2안 */
-    const index = itemList.findIndex((item) => item.num === num);
-
-    if (index !== -1) {
-      itemList.splice(index, 1);
-    }
-    // 데이터를 기반으로 화면 갱신
+    const newItemList = itemList.filter((item) => item.num !== num);
+    setItemList(newItemList);
   }
 
   return (
@@ -128,7 +121,7 @@ function Todo() {
         <ul>
           <li>
             <TodoInput addItem={addItem} />
-            <TodoList itemList={itemList} />
+            <TodoList itemList={itemList} deleteItem={deleteItem} toggleDone={toggleDone} />
           </li>
         </ul>
       </div>
