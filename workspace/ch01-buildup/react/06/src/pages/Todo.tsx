@@ -1,10 +1,11 @@
 import { useState } from "react";
 import TodoInput from "./TodoInput";
 import TodoList from "./TodoList";
+import type { TodoItem } from "./TodoItem";
 
 function Todo() {
   // 샘플 목록
-  const initItemList = [
+  const initItemList: TodoItem[] = [
     { num: 1, title: "자바스크립트 공부", done: true },
     { num: 2, title: "JS 프로젝트", done: true },
     { num: 3, title: "React 공부", done: false },
@@ -19,7 +20,7 @@ function Todo() {
     console.log("할일 추가");
     // 데이터 갱신, itemList에 item 추가
     // num, title, done 속성을 가진 item 객체 생성
-    const item = { num: itemList[itemList.length - 1]?.num + 1 || 1, title, done: false };
+    const item: TodoItem = { num: itemList[itemList.length - 1]?.num + 1 || 1, title, done: false };
     setItemList([...itemList, item]);
   }
 

@@ -1,4 +1,16 @@
-function TodoItem({ item, deleteItem, toggleDone }) {
+export interface TodoItem {
+  num: number;
+  title: string;
+  done: boolean;
+}
+
+interface TodoItemProps {
+  item: TodoItem;
+  toggleDone: (num: number) => void;
+  deleteItem: (num: number) => void;
+}
+
+function TodoItem({ item, deleteItem, toggleDone }: TodoItemProps) {
   return (
     <li>
       <span>{item.num}</span>
