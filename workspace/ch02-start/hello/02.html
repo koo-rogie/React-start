@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello - React</title>
+    <link rel="icon" href="/assets/favicon.ico" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hello - React</title>
-  <link rel="icon" href="/assets/favicon.ico">
-</head>
+  <body>
+    <div>
+      <!-- <h1>02 Hello DOM</h1> -->
+    </div>
 
-<body>
-  <div>
-    <h1>02 Hello DOM</h1>
-  </div>
+    <script>
+      function App() {
+        const divElem = document.querySelector("div");
+        const h1 = document.createElement("h1");
+        const h1Txt = document.createTextNode("02 Hello DOM");
 
-  <script>
-    function App(){
-      
-    }
-  </script>
-</body>
-
+        h1.appendChild(h1Txt);
+        divElem.appendChild(h1);
+        return h1;
+      }
+    </script>
+  </body>
 </html>
