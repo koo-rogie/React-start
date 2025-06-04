@@ -1,4 +1,4 @@
-import Reaction from "../../reaction.js";
+import Reaction from "./reaction.js";
 import App from "./App.js";
 
 /*

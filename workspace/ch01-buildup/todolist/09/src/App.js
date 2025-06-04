@@ -20,15 +20,6 @@ function App() {
    */
   function addItem(title) {
     console.log("할일 추가");
-    /* 1안
-    const newItemList = [...itemList];
-    // 데이터 갱신, itemList에 item 추가
-    // num, title, done 속성을 가진 item 객체 생성
-    
-    newItemList.push(item);
-    
-    setItemList(newItemList);
-    */
     const item = {
       num: itemList[itemList.length - 1]?.num + 1 || 1,
       title,
@@ -44,25 +35,6 @@ function App() {
    */
   function toggleDone(num) {
     console.log(num, "완료/미완료");
-    // 데이터 갱신, itemList에서 num에 해당하는 item의 done 값을 수정
-    // itemList에서 num 값으로 item 조회
-    /* 1안 
-    let selectedItem;
-    itemList.forEach((item) => {
-    if (item.num === num) {
-      selectedItem = item;
-    }
-    });
-    */
-
-    /* 2안
-    const selectedItem = itemList.find((item) => item.num === num);
-    
-    console.log("선택된 li", selectedItem);
-    // item의 done 값을 수정
-    selectedItem.done = !selectedItem.done;
-    */
-
     /* 3안 */
     const newItemList = itemList.map((item) => {
       return item.num === num ? { ...item, done: !item.done } : item;
@@ -76,24 +48,6 @@ function App() {
    */
   function deleteItem(num) {
     console.log(num, "할일 삭제");
-    /* 1안
-    // 데이터 갱신, itemList에서 num에 해당하는 item 삭제
-    const targetLi = document.querySelector(`.todolist > li[data-num="${num}"]`);
-    
-    화면 갱신, 화면에서 num에 해당하는 item 제거
-    if (targetLi) {
-        targetLi.remove();
-      }
-    */
-
-    /* 2안
-    const index = itemList.findIndex((item) => item.num === num);
-    
-    if (index !== -1) {
-      itemList.splice(index, 1);
-    }
-    */
-
     /*3안*/
     const newItemList = itemList.filter((item) => item.num !== num);
     setItemList(newItemList);

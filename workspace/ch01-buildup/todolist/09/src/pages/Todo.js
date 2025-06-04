@@ -4,7 +4,6 @@ import TodoList from "./TodoList.js";
 
 /**
  * Todo 섹션을 렌더링합니다.
- * @param {{ handleAdd: function, handleAddKeydown: function, itemList: object[] }} props - Todo 컴포넌트에 필요한 props
  * @returns {HTMLElement} Todo 섹션 요소
  */
 function Todo(props) {
