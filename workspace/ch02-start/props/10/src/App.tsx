@@ -1,5 +1,14 @@
+import Counter from "@components/Counter";
+import Header from "@components/Header";
+
 function App() {
-  return <div>안녕하세요</div>
+  console.log("app 함수 호출됨");
+  return (
+    <div id="app">
+      <Header />
+      <Counter />
+    </div>
+  );
 }
 
 export default App;
