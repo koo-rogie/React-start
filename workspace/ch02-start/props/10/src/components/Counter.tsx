@@ -1,4 +1,5 @@
-import { useState } from "react";
+import Button from "@components/Button";
+import React, { useState } from "react";
 
 function Counter() {
   console.log("\tCounter 함수 호출됨");
@@ -16,21 +17,16 @@ function Counter() {
   };
 
   // 카운터 초기화
-  const handleReset = () => {
+  const handleReset = (e: React.MouseEvent) => {
+    console.log("리셋", e.type);
     setCount(0); // 데이터 갱신, count 값 초기화
   };
 
   return (
     <div id="counter">
-      <button type="button" onClick={handleDown}>
-        -
-      </button>
-      <button type="button" onClick={() => handleReset()}>
-        RESET
-      </button>
-      <button type="button" onClick={handleUp}>
-        +
-      </button>
+      <Button onClick={handleDown} children={"-_-"} color={"pink"} size={"24px"} />
+      <Button onClick={(e) => handleReset(e)} children={"RESET"} color={""} size={"24px"} />
+      <Button onClick={handleUp} children={"+_+"} color={"skyblue"} size={"24px"} />
       <span>{count}</span>
     </div>
   );
