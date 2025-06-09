@@ -24,9 +24,9 @@ function Counter() {
 
   return (
     <div id="counter">
-      <Button onClick={handleDown} children={"-_-"} color={"pink"} size={"24px"} />
-      <Button onClick={(e) => handleReset(e)} children={"RESET"} color={""} size={"24px"} />
-      <Button onClick={handleUp} children={"+_+"} color={"skyblue"} size={"24px"} />
+      <Button type="button" onClick={handleDown} children={"-_-"} color={"pink"} size={"24px"} />
+      <Button type="reset" onClick={(e) => handleReset(e)} children={"RESET"} color={""} size={"24px"} />
+      <Button type="submit" onClick={handleUp} children={"+_+"} color={"skyblue"} size={"24px"} />
       <span>{count}</span>
     </div>
   );
