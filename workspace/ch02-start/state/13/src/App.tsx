@@ -1,35 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [position, setPosition] = useState({ x: 50, y: 150 });
+  const pointerMoving = (event: React.MouseEvent) => {
+    console.log(event.pageX, event.pageY);
+    // 리렌더링 되지 않음
+    // position.x = event.pageX;
+    // position.y = event.pageY;
+
+    // 리렌더링 됨(새로운 객체로 생성)
+    const newPosition = {
+      x: event.pageX,
+      y: event.pageY,
+    };
+
+    setPosition(newPosition);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>13 상태관리 대상이 객체일 경우 주의 사항</h1>
+      <p>마우스 따라가기</p>
+      <div className="container" onPointerMove={pointerMoving}></div>
+      <div className="circle" style={{ pointerEvents: "none", transform: `translate(${position.x}px, ${position.y}px)` }}></div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
