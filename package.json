@@ -6,6 +6,7 @@
     "live-server": "^1.2.2"
   },
   "dependencies": {
-    "immer": "^10.1.1"
+    "immer": "^10.1.1",
+    "react-hook-form": "^7.57.0"
   }
 }
