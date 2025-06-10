@@ -1,118 +1,132 @@
-/**
- * 상태의 불변성 (immutability)
- */
-
-import EditAddress from "@components/EditAddress";
-import { produce } from "immer";
 import React, { useState } from "react";
 
+const errorStyle = {
+  // css 정의
+  fontSize: "12px",
+  color: "red",
+  fontWeight: "bold",
+};
+
+interface ForErrors {
+  name?: { message: string };
+  email?: { message: string };
+  cellphone?: { message: string };
+}
+
+// 휴대폰 검증 정규식
+const cellphoneExp = /^(01[016789]{1})[0-9]{3,4}[0-9]{4}$/;
+// 이메일 검증 정규식
+const emailExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 function App() {
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [cellphone, setCellphone] = useState("010");
+
+  // const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setName(e.target.value);
+  // };
+  // const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setEmail(e.target.value);
+  // };
+  // const handleCellPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setCellphone(e.target.value);
+  // };
+
+  // const user = { name, email, cellphone };
+
   const [user, setUser] = useState({
-    _id: 4,
-    email: "u1@market.com",
-    name: "데이지",
-    phone: "01044445555",
-    address: "서울시 강남구 논현동 222",
-    type: "user",
-    createdAt: "2025.05.25 21:08:14",
-    updatedAt: "2025.06.04 09:38:14",
-    extra: {
-      birthday: "11-30",
-      addressBook: [
-        {
-          id: 1,
-          name: "회사",
-          value: "서울시 강동구 천호동 123",
-        },
-        {
-          id: 2,
-          name: "집",
-          value: "서울시 강동구 성내동 234",
-        },
-      ],
-    },
+    // 초기값 설정
+    name: "",
+    email: "",
+    cellphone: "010",
   });
 
-  const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.id, e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUser({
+      ...user, // 기존 값 복사
+      [e.target.name]: e.target.value, // 입력한 값의 name을 가지고 오고 그것과 같은 value값을 수정해라
+    });
+  };
 
-    // 상태의 불변성이 지켜지지 않음
-    // const newUser = {
-    //   // 원본을 먼저 복사함
-    //   ...user,
-    // };
-    // const address = user.extra.addressBook.find((address) => address.id === Number(e.target.id)); // 클릭한 input의 id값과 id값이 맞는지 확인함
-    // address!.value = e.target.value;
-    // const newUser = {
-    //   // 수정된 정보를 다시 랜더링 된다
-    //   ...user,
-    // };
+  // 검증만 완료할 수 있는 코드임, 상태를 관리 못함
+  // let errors: ForErrors = {};
 
-    /*
-    // 상태의 불변성을 지키기 위해서 추가 작업 필요
-    const newAddressBook = user.extra.addressBook.map((address) => {
-      if (address.id === Number(e.target.id)) {
-        // 바꿔야하는 주소가 같으면 바꾸고
-        return { ...address, value: e.target.value };
-      } else {
-        // 바꿔야하는 주소가 다르면 유지한다
-      return address;
+  // 검증 에러가 발생하거나 에러가 사라질때 리렌더잉이 필요함으로 상태로 관리해야한다
+  const [errors, setErrors] = useState<ForErrors>({});
+
+  const onSubmitHandler = (e: React.FormEvent) => {
+    e.preventDefault();
+    // 필수 입력 체크
+    let newErrors = null;
+    if (user.name.trim() === "") {
+      newErrors = {
+        name: { message: "이름을 입력하세요." },
+      };
+    } else if (user.name.trim().length < 2) {
+      newErrors = {
+        name: { message: "2글자 이상 입력하세요." },
+      };
+    } else if (user.email.trim() === "") {
+      newErrors = {
+        email: { message: "이메일을 입력하세요." },
+      };
+    } else if (emailExp.test(user.email) === false) {
+      newErrors = {
+        email: { message: "이메일 양식에 맞지 않습니다." },
+      };
+    } else if (user.cellphone.trim() === "") {
+      newErrors = {
+        cellphone: { message: "휴대폰 번호를 입력하세요." },
+      };
+    } else if (cellphoneExp.test(user.cellphone) === false) {
+      newErrors = {
+        cellphone: { message: "휴대폰 형식에 맞지 않습니다." },
+      };
     }
-    });
-  
-  const newUser = {
-    ...user, // 기존거는 유지함
-    extra: {
-        ...user.extra, // 기존거는 유지함
-        addressBook: newAddressBook, // 바뀐것을 기반으로 새로 만들어짐
-      },
-    };
-  */
-    /* 라이브러리 사용(상태의 불변성을 지킴)*/
-    // npm i immer
-    // user를 복사한 새로운 객체를 만들어서 콜백함수의 인자로 전달
-    const newUser = produce(user, (draft) => {
-      const address = draft.extra.addressBook.find((address) => address.id === Number(e.target.id)); // 클릭한 input의 id값과 id값이 맞는지 확인함
-      address!.value = e.target.value;
-    });
 
-    // 회사 정보가 변경될 경우
-    console.log("user", user === newUser); // 기대값 false, 실제 값: false
-    console.log("user.exter", user.extra === newUser.extra); // 기대값 false, 실제 값: true
-    console.log("user.extra.addressBook", user.extra.addressBook === newUser.extra.addressBook); // 기대값 false, 실제 값: true
-    console.log("회사", user.extra.addressBook[0] === newUser.extra.addressBook[0]); // 기대값 false, 실제 값: true
-    console.log("회사 주소", user.extra.addressBook[0].value === newUser.extra.addressBook[0].value); // 기대값 false, 실제 값: true
-
-    console.log("집", user.extra.addressBook[1] === newUser.extra.addressBook[1]); // 기대값 true, 실제 값: true
-    console.log("집 주소", user.extra.addressBook[1].value === newUser.extra.addressBook[1].value); // 기대값 true, 실제 값: true
-
-    console.log("예전 회사 정보", user.extra.addressBook[0]);
-    console.log("바뀐 회사 정보", newUser.extra.addressBook[0]);
-    setUser(newUser);
+    if (newErrors) {
+      // 입력값 검증 실패
+      // errors = newErrors;
+      setErrors(newErrors);
+      console.error(errors);
+    } else {
+      // 입력값 검증 통과
+      // errors = {};
+      setErrors(errors);
+      console.log("서버에 전송...", user);
+    }
   };
 
   return (
     <>
-      <h1>14 상태관리 대상이 복합 객체일 경우 불변성 (feat. immer)</h1>
-      <p>npm i immer 사용</p>
-      <p>
-        이메일: {user.email}
+      <h1>15 회원가입 입력값 상태 관리</h1>
+
+      <form onSubmit={onSubmitHandler}>
+        <label htmlFor="name">이름</label>
+        <input id="name" name="name" value={user.name} onChange={handleChange} />
         <br />
+        <div style={errorStyle}>{errors.name?.message}</div>
+
+        <label htmlFor="email">이메일</label>
+        <input id="email" name="email" value={user.email} onChange={handleChange} />
+        <br />
+        <div style={errorStyle}>{errors.email?.message}</div>
+
+        <label htmlFor="cellphone">휴대폰</label>
+        <input id="cellphone" name="cellphone" value={user.cellphone} onChange={handleChange} />
+        <br />
+        <div style={errorStyle}>{errors.cellphone?.message}</div>
+
+        <button type="submit">가입</button>
+      </form>
+      <p>
         이름: {user.name}
         <br />
-        전화번호: {user.phone}
+        이메일: {user.email}
         <br />
-      </p>
-      <ul>
-        {user.extra?.addressBook?.map((address) => (
-          <li key={address.id}>
-            {address.name}: {address.value}
-          </li>
-        ))}
-      </ul>
-
-      <p>
-        <EditAddress addressBook={user.extra.addressBook} handleAddressChange={handleAddressChange} />
+        휴대폰: {user.cellphone}
+        <br />
       </p>
     </>
   );
