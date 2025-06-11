@@ -105,11 +105,18 @@ class CilckMe extends Component<ClickMeProps, ClickMeState> {
     return "hello";
   }
 
-  // 2-5
+  // 2-5(https://github.com/FEBC-13/React/tree/main/workspace-ins/ch03-class#2-5-componentdidupdateprevprops-prevstate-snapshot-%ED%95%A8%EC%88%98%ED%98%95-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EC%97%90%EC%84%9C%EB%8A%94-useeffect%EB%A1%9C-%EC%82%AC%EC%9A%A9-%EA%B0%80%EB%8A%A5)
   componentDidUpdate(prevProps: ClickMeProps, prevState: ClickMeState, snapshot: string) {
-    console.log("2-4 componentDidUpdate");
+    console.log("2-5 componentDidUpdate 호출됨.");
+    console.log("\t이전값", prevProps, prevState);
+    console.log("\t현재값", this.props, this.state);
+    console.log("\tsnapshot", snapshot);
+  }
 
-    console.log(prevProps, prevState, snapshot);
+  // 3-1 (https://github.com/FEBC-13/React/tree/main/workspace-ins/ch03-class#3-1-componentwillunmount-%ED%95%A8%EC%88%98%ED%98%95-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EC%97%90%EC%84%9C%EB%8A%94-useeffect%EB%A1%9C-%EC%82%AC%EC%9A%A9-%EA%B0%80%EB%8A%A5)
+  componentWillUnmount(): void {
+    console.log("3-1 componentWillUnmount 호출");
+    
   }
 }
 
