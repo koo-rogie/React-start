@@ -10,15 +10,12 @@ function App() {
     setMsg(e.target.value);
   };
 
-  let hello = "hello";
-  setTimeout(() => {
-    hello = "world";
-    console.log(hello);
-  }, 1000);
+  // 서버의 시간을 ajax로 요청
+  const title = 124;
 
   return (
     <>
-      <h1>01 useState - 상태 관리 {hello}</h1>
+      <h1>01 useState - 상태 관리 {title}</h1>
       <div>
         {/* 
           <input type="text" value={msg}/>  
