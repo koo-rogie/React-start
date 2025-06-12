@@ -44,7 +44,7 @@ function Counter({ children = "1" }: CountProps) {
   // }, [step]); // step이 수정되면 콜백 함수가 실행이 됨
 
   useEffect(() => {
-    console.log("setup 함수 호출 / 호텔 ci");
+    console.log("\tsetup 함수 호출 / 호텔 ci");
     // setup함수는 리턴할 수 있음
     const timer = setInterval(() => {
       console.log(new Date());
@@ -59,7 +59,7 @@ function Counter({ children = "1" }: CountProps) {
 
     return () => {
       // clearup(컴포넌트가 언마운트될 때 호출, setup 함수에서 생성한 자원을 해재하는 코드 작성)
-      console.log("clearup 함수 호출 / 호텔 co");
+      console.log("\tclearup 함수 호출 / 호텔 co");
       clearInterval(timer);
     };
   });
@@ -86,6 +86,12 @@ function Counter({ children = "1" }: CountProps) {
   const handleReset = () => {
     setCount(0);
   };
+
+  console.log("렌더링 중", document.querySelector("span")?.textContent); // 렌더링 전에 콘솔에 출력했기때문에 undefined
+
+  useEffect(() => {
+    console.log("렌더링 후", document.querySelector("span")?.textContent); // 렌더링이 된 후 콘솔에 출력했기 때문에 span에 textContent 출력
+  });
 
   return (
     <div id="counter">
