@@ -1,43 +1,74 @@
 import Button from "@components/Button";
-import { useState } from "react";
+import { useReducer, useState } from "react";
 
 interface CounterProps {
   children: string;
 }
 
-// TODO 리듀서 작성
-// 현재 상태와 action 객체를 받아서 새로운 상태를 반환하는 순수 함수
-// 로직을 컴포넌트 내부에서 직접 구현하지 않고 외부에서 구현
-// state: 이전 상태(useReducer가 내부적으로 관리, 이전의 리턴값이 다음의 state로 전달)
-// action: 동작을 정의한 객체(자유롭게 작성. 일반적으로 type 속성에 동작을, value 속성에 값을 지정)
-// 리턴값: 새로운 상태
-function counterReducer(){ // (6, { type: 'UP', value: 1 }) => 7
-  
+interface CounterAction {
+  type: "UP" | "DOWN" | "RESET";
+  value: number;
+}
+/**
+ * 현재 상태와 action 객체를 받아서 새로운 상태를 반환하는 순수 함수
+ * 로직을 컴포넌트 내부에서 직접 구현하지 않고 외부에서 구현
+ * @param state state: 이전 상태(useReducer가 내부적으로 관리, 이전의 리턴값이 다음의 state로 전달)
+ * @param action action: 동작을 정의한 객체(자유롭게 작성. 일반적으로 type 속성에 동작을, value 속성에 값을 지정)
+ * 리턴값: 새로운 상태
+ */
+function counterReducer(state: number, action: CounterAction): number {
+  // (6, { type: 'UP', value: 1 }) => 7
+
+  let newState = state;
+  switch (action.type) {
+    case "UP":
+      newState = state + action.value;
+      break;
+    case "DOWN":
+      newState = state - action.value;
+      break;
+    case "RESET":
+      newState = action.value;
+      break;
+  }
+  console.log(`${state} ${action.type} => ${action.value}`);
+  return newState;
 }
 
+console.log(counterReducer(6, { type: "DOWN", value: 1 })); // 5
+console.log(counterReducer(8, { type: "UP", value: 2 })); // 10
+console.log(counterReducer(3, { type: "RESET", value: 5 })); // 5
+
 // Counter 컴포넌트
-function Counter({ children='0' }: CounterProps){
-  console.log('\tCounter 호출됨');
+function Counter({ children = "0" }: CounterProps) {
+  console.log("\tCounter 호출됨");
 
   const initCount = Number(children);
 
-  const [ count, setCount ] = useState(initCount);
+  // const [count, setCount] = useState(initCount);
+  const [count, countDispatch] = useReducer(counterReducer, initCount);
   const [step, setStep] = useState(1);
 
   // 카운터 감소
   function handleDown() {
-    setCount(count - step);
-  };
+    // setCount(count - step);
+    // const newCount = counterReducer(count, { type: "DOWN", value: step });
+    countDispatch({ type: "DOWN", value: step });
+  }
 
   // 카운터 증가
   function handleUp() {
-    setCount(count + step);
-  };
+    // setCount(count + step);
+    // const newCount = counterReducer(count, { type: "UP", value: step });
+    countDispatch({ type: "UP", value: step });
+  }
 
   // 카운터 초기화
   function handleReset() {
-    setCount(initCount);
-  };
+    // setCount(initCount);
+    // const newCount = counterReducer(count, { type: "RESET", value: step });
+    countDispatch({ type: "RESET", value: step });
+  }
 
   // 증감값 변경 처리
   function handleStepChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -49,16 +80,17 @@ function Counter({ children='0' }: CounterProps){
     <div id="counter">
       <label htmlFor="step">증감치</label>
       {/* 제어 컴포넌트 value, onChange 사용 */}
-      <input 
-        id="step" 
-        type="number" 
-        value={ step } 
-        onChange={ handleStepChange } 
-      />
-      <Button color="red" onClick={ handleDown }>-_-</Button>
-      <Button type="reset" onClick={ handleReset }>0_0</Button>
-      <Button type="submit" color="blue" onClick={ handleUp }>+_+</Button>
-      <span>{ count }</span>
+      <input id="step" type="number" value={step} onChange={handleStepChange} />
+      <Button color="red" onClick={handleDown}>
+        -_-
+      </Button>
+      <Button type="reset" onClick={handleReset}>
+        0_0
+      </Button>
+      <Button type="submit" color="blue" onClick={handleUp}>
+        +_+
+      </Button>
+      <span>{count}</span>
     </div>
   );
 }
