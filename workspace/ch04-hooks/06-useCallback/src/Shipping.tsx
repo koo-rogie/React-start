@@ -1,3 +1,5 @@
+import React from "react";
+
 interface ShippingProps {
   fees: number;
   handlePayment: () => void;
@@ -21,4 +23,4 @@ function Shipping({ fees, handlePayment }: ShippingProps) {
   );
 }
 
-export default Shipping;
+export default React.memo(Shipping);

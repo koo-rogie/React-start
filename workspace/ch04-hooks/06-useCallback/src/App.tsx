@@ -2,6 +2,7 @@ import { useState } from "react";
 import Shipping from "./Shipping";
 import Product from "./Product";
 import Price from "./Price";
+import { preconnect } from "react-dom";
 
 function App() {
   const data = {
@@ -17,7 +18,7 @@ function App() {
   };
   const [quantity, setQuantity] = useState(1);
 
-  const produtPrice = data.price * quantity;
+  const productPrice = data.price * quantity;
   const shoppingFees = data.shippingFees * Math.ceil(quantity / 5);
 
   // 수량이 변경되면 배송비 다시 계산
@@ -28,14 +29,22 @@ function App() {
 
   // 결제 버튼 클릭 시 결제 확인 메시지 표시
   const handlePayment = () => {
-    alert(`상품을 결제하시겠습니까?`);
+    alert(`${productPrice}원 상품을 결제하시겠습니까?`);
   };
 
   return (
     <>
       <h1>06 useCallback(함수 자체를 memoize), React.memo(컴포넌트를 memoize)</h1>
       <Product name={data.name} price={data.price} mainImage={data.mainImage} content={data.content} />
-      <Price price={data.price} shippingFees={data.shippingFees} produtPrice={produtPrice} handleQuantityChange={handleQuantityChange} quantity={data.quantity} buyQuantity={data.buyQuantity} />
+      <Price
+        price={data.price}
+        maxQuantity={data.quantity - data.buyQuantity}
+        shippingFees={data.shippingFees}
+        productPrice={productPrice}
+        handleQuantityChange={handleQuantityChange}
+        quantity={quantity}
+      />
+
       <Shipping fees={shoppingFees} handlePayment={handlePayment} />
     </>
   );

@@ -1,3 +1,5 @@
+import React from "react";
+
 interface ProductProps {
   name: string;
   price: number;
@@ -23,4 +25,4 @@ function Product({ name, price, mainImage, content }: ProductProps) {
   );
 }
 
-export default Product;
+export default React.memo( Product);
