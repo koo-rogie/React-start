@@ -4,6 +4,8 @@ import Product from "./Product";
 import Price from "./Price";
 
 function App() {
+  // "use no memo"; // 컴파일러에 의한 자동 메모 기능 해체 지시어
+
   const data = {
     _id: 2,
     price: 125000,

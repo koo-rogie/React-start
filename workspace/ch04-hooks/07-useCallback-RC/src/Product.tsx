@@ -7,6 +7,7 @@ interface ProductProps {
 
 // TODO 컴포넌트를 메모이제이션 해서 불필요한 리렌더링 방지
 function Product({ name, price, mainImage, content }: ProductProps) {
+  "use no memo"; // 컴파일러에 의한 자동 메모 기능 해체 지시어
   console.log("Product 렌더링.");
 
   return (
