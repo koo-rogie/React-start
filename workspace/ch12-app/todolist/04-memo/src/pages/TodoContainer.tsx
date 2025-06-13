@@ -1,7 +1,7 @@
 import Todo from "@pages/Todo";
 import type { TodoItem } from "@pages/TodoItem";
 import todoReducer from "@pages/todoReducer";
-import { useReducer, useRef } from "react";
+import { useCallback, useReducer, useRef } from "react";
 
 function TodoContainer() {
   "use no memo";
@@ -24,6 +24,9 @@ function TodoContainer() {
   };
 
   // TODO 1. useCallback으로 콜백 함수 메모이제이션
+  const cachedFn = useCallback(() => {
+    console.log("안녕");
+  }, []);
 
   // 완료/미완료 처리
   const toggleDone = (_id: number) => {
@@ -35,7 +38,7 @@ function TodoContainer() {
     todoDispatch({ type: "DELETE", value: { _id } });
   };
 
-  return <Todo itemList={itemList} addItem={addItem} toggleDone={toggleDone} deleteItem={deleteItem} />;
+  return <Todo itemList={itemList} addItem={addItem} toggleDone={toggleDone} deleteItem={deleteItem} cachedFn={cachedFn} />;
 }
 
 export default TodoContainer;

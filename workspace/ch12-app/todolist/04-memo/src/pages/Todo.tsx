@@ -1,4 +1,3 @@
-
 import TodoInput from "@pages/TodoInput";
 import type { TodoItem } from "@pages/TodoItem";
 import TodoList from "@pages/TodoList";
@@ -8,10 +7,11 @@ interface TodoProps {
   addItem: (title: string) => void;
   toggleDone: (id: number) => void;
   deleteItem: (id: number) => void;
+  cachedFn: () => void;
 }
 
-function Todo(props: TodoProps){
-  console.log('\tTodo 렌더링');
+function Todo(props: TodoProps) {
+  console.log("\tTodo 렌더링");
 
   return (
     <div id="main">
@@ -19,8 +19,8 @@ function Todo(props: TodoProps){
         <ul>
           <li>
             <h2>할일 목록</h2>
-            <TodoInput addItem={ props.addItem } />
-            <TodoList itemList={ props.itemList } toggleDone={ props.toggleDone } deleteItem={ props.deleteItem } />
+            <TodoInput addItem={props.addItem} />
+            <TodoList itemList={props.itemList} toggleDone={props.toggleDone} deleteItem={props.deleteItem} cachedFn={props.cachedFn} />
           </li>
         </ul>
       </div>
