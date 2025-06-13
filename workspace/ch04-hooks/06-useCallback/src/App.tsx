@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Shipping from "./Shipping";
 import Product from "./Product";
 import Price from "./Price";
@@ -28,9 +28,9 @@ function App() {
   };
 
   // 결제 버튼 클릭 시 결제 확인 메시지 표시
-  const handlePayment = () => {
-    alert(`${productPrice}원 상품을 결제하시겠습니까?`);
-  };
+  const handlePayment = useCallback(() => {
+    alert(`상품금액 ${productPrice}원과 배송비 ${shoppingFees}원이 추가됩니다. 상품을 결제하시겠습니까?`);
+  }, [productPrice, shoppingFees]);
 
   return (
     <>

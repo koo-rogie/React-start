@@ -33,7 +33,7 @@ function App() {
 
   return (
     <>
-      <h1>06 useCallback(함수 자체를 memoize), React.memo(컴포넌트를 memoize)</h1>
+      <h1>07 React Compiler를 사용한 메모이제이션</h1>
       <Product name={data.name} price={data.price} mainImage={data.mainImage} content={data.content} />
       <Price
         price={data.price}

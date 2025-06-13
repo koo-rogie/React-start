@@ -3,6 +3,7 @@
     "start": "live-server workspace --port=3000 --host=localhost"
   },
   "devDependencies": {
+    "babel-plugin-react-compiler": "^19.1.0-rc.2",
     "live-server": "^1.2.2"
   },
   "dependencies": {

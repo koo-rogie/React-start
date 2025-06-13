@@ -25,4 +25,4 @@ function Product({ name, price, mainImage, content }: ProductProps) {
   );
 }
 
-export default React.memo( Product);
+export default React.memo(Product);
