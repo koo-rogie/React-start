@@ -15,7 +15,11 @@ function TodoContainer() {
   const [itemList, todoDispatch] = useReducer(TodoReducer, initItemList);
 
   // TODO useRef를 사용해서 nextId를 생성해서 할일 추가시 1씩 증가
-  const itemRef = useRef(initItemList[itemList.length - 1]?._id + 1 || 1);
+  // 내가한거
+  // const itemRef = useRef(initItemList[itemList.length - 1]?._id + 1 || 1);
+
+  // 선생님
+  const itemRef = useRef(initItemList.length + 1);
 
   // 할일 추가
   const addItem = (title: string) => {

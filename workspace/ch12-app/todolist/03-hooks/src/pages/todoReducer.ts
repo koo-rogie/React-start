@@ -1,4 +1,5 @@
 import type { TodoItem } from "@pages/TodoItem";
+import { produce } from "immer";
 
 type TodoAction = { type: "ADD"; value: TodoItem } | { type: "TOGGLE" | "DELETE"; value: { _id: number } };
 
@@ -9,17 +10,41 @@ type TodoAction = { type: "ADD"; value: TodoItem } | { type: "TOGGLE" | "DELETE"
 
 function TodoReducer(state: TodoItem[], action: TodoAction) {
   // TODO 1. 상태관리 로직 작성
+  /* 내가 한것
+    switch (action.type) {
+      case "ADD":
+        return [...state, action.value];
+      case "TOGGLE":
+        return state.map((item) => (item._id === action.value._id ? { ...item, done: !item.done } : item));
+      case "DELETE":
+        return state.filter((item) => item._id !== action.value._id);
+    default:
+      return state;
+    }
+  */
+
+  let newState;
+  const targetIndex = state.findIndex((item) => item._id === action.value._id);
+
   switch (action.type) {
     case "ADD":
-      return [...state, action.value];
+      newState = produce(state, (draft) => {
+        draft.push(action.value);
+      });
+      break;
     case "TOGGLE":
-      return state.map((item) => (item._id === action.value._id ? { ...item, done: !item.done } : item));
+      newState = produce(state, (draft) => {
+        draft[targetIndex].done = !draft[targetIndex].done;
+      });
+      break;
     case "DELETE":
-      return state.filter((item) => item._id !== action.value._id);
-
+      newState = produce(state, (draft) => {
+        draft.splice(targetIndex, 1);
+      });
+      break;
     default:
+      newState = state;
   }
-
-  return state;
+  return newState;
 }
 export default TodoReducer;

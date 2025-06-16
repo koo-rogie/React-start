@@ -12,33 +12,40 @@ function TodoContainer() {
     { _id: 3, title: "React 공부", done: false },
   ];
 
+  for (let i = 4; i < 10000; i++) {
+    initItemList.push({ _id: i, title: `쌤플-${i}`, done: false });
+  }
+
   const nextId = useRef(initItemList.length + 1);
 
   // 상태가 수정되면 자동으로 화면이 리렌더링 된다.
   const [itemList, todoDispatch] = useReducer(todoReducer, initItemList);
 
   // 할일 추가
-  const addItem = (title: string) => {
-    const item: TodoItem = { _id: nextId.current++, title, done: false };
-    todoDispatch({ type: "ADD", value: item });
-  };
+  const addItem = useCallback(
+    (title: string) => {
+      const item: TodoItem = { _id: nextId.current++, title, done: false };
+      todoDispatch({ type: "ADD", value: item });
+      console.log("add의 title은?", title);
+    },
+    [nextId]
+  );
 
   // TODO 1. useCallback으로 콜백 함수 메모이제이션
-  const cachedFn = useCallback(() => {
-    console.log("안녕");
-  }, []);
 
   // 완료/미완료 처리
-  const toggleDone = (_id: number) => {
+  const toggleDone = useCallback((_id: number) => {
     todoDispatch({ type: "TOGGLE", value: { _id } });
-  };
+    console.log("toggle 몇번째야?", _id);
+  }, []);
 
   // 할일 삭제
-  const deleteItem = (_id: number) => {
+  const deleteItem = useCallback((_id: number) => {
     todoDispatch({ type: "DELETE", value: { _id } });
-  };
+    console.log("delete 몇번째야?", _id);
+  }, []);
 
-  return <Todo itemList={itemList} addItem={addItem} toggleDone={toggleDone} deleteItem={deleteItem} cachedFn={cachedFn} />;
+  return <Todo itemList={itemList} addItem={addItem} toggleDone={toggleDone} deleteItem={deleteItem} />;
 }
 
 export default TodoContainer;

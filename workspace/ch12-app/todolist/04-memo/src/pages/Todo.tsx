@@ -7,7 +7,6 @@ interface TodoProps {
   addItem: (title: string) => void;
   toggleDone: (id: number) => void;
   deleteItem: (id: number) => void;
-  cachedFn: () => void;
 }
 
 function Todo(props: TodoProps) {
@@ -20,7 +19,7 @@ function Todo(props: TodoProps) {
           <li>
             <h2>할일 목록</h2>
             <TodoInput addItem={props.addItem} />
-            <TodoList itemList={props.itemList} toggleDone={props.toggleDone} deleteItem={props.deleteItem} cachedFn={props.cachedFn} />
+            <TodoList itemList={props.itemList} toggleDone={props.toggleDone} deleteItem={props.deleteItem} />
           </li>
         </ul>
       </div>
