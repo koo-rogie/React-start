@@ -87,7 +87,7 @@ function App() {
   // 컴포넌트가 마운트 된 이 후에 Todo 목록 조회
   useEffect(() => {
     console.log("마운트된 후에 한번만 호출됨");
-    const fetchPrarms = { url: "/todolist" };
+    const fetchPrarms = { url: "/todolist?dlay=1000" };
     fetchTodo(fetchPrarms);
   }, []); // 빈 배열을 지정하면 마운트시 한번만 실행되도록 설정
 
@@ -108,7 +108,7 @@ function App() {
           return (
             <li key={item._id}>
               <span>{item._id}번</span>
-              <span>\t{item.title}</span>
+              <span> {item.title}</span>
             </li>
           );
         })}
