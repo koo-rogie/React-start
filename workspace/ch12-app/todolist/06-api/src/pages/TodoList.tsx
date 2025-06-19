@@ -1,50 +1,38 @@
 // import useAxios from "@hooks/useAxios";
+import useAxiosInstance from "@hooks/useAxiosInstance";
 import type { TodoItem } from "@pages/TodoInfo";
 import TodoListItem from "@pages/TodoListItem";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-// import type { TodoListRes } from "types/todo";
 
 interface TodoList {
   items: TodoItem[];
 }
-const dummyData: TodoList = {
-  items: [
-    {
-      _id: 1,
-      title: "잠자기",
-      done: true,
-      createdAt: "2025.06.16 16:49:00",
-      updatedAt: "2025.06.16 16:49:00",
-    },
-    {
-      _id: 2,
-      title: "자바스크립트 복습",
-      done: false,
-      createdAt: "2025.06.17 16:49:00",
-      updatedAt: "2025.06.17 16:49:00",
-    },
-  ],
-};
 
 function TodoList() {
-  // const { isLoading, error, data } = useAxios<TodoListRes>({ url: "/todolist?delay=1000" });
-
-  // console.log("App 랜더링", isLoading, error, data);
+  const axiosInstance = useAxiosInstance();
 
   const [data, setDate] = useState<TodoList | null>(null);
 
   // 할일 목록은 API에서 조회
-  const fetchTodoList = () => {
-    // 아직은 서버랑 연결을 안했으니 더미데이터로
+  const fetchTodoList = async () => {
     console.log("API서버에 목록 요청");
-    setDate(dummyData);
+
+    try {
+      // 정상 사이트에 접근 할 경우에 나옴
+      const res = await axiosInstance.get<TodoList>("/todolist");
+      setDate(res.data);
+    } catch (err) {
+      // 이미 삭제된 페이지에 접근 할 경우 나옴
+      console.error("일정 조회에 실패했습니다.", err);
+      alert("일정 조회에 실패했습니다.");
+    }
   };
 
   // 삭제 처리
   const handleDelet = (_id: number) => {
-    // 아직은 서버랑 연결을 안했으니 더미데이터로
     // API 서버에 삭제 요청
+
     console.log("API서버에 삭제 요청", _id);
     alert(`${_id}번 삭제가 완료됐습니다 `);
 

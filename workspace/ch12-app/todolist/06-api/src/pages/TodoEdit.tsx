@@ -27,10 +27,14 @@ function TodoEdit() {
   // 수정버튼을 클릭시
   const updateTodo = (formData: TodoItem) => {
     console.log("API 서버에 수정 요청", formData);
-    alert("할일이 수정 되었습니다.");
-
+    try {
+      alert("할일이 수정 되었습니다.");
+      navigate(-1); // window.history.go(-1), 한페이지 전 화면을 보여줌
+    } catch (err) {
+      console.error("할일 수정에 실패하였습니다",err)
+      alert("할일 수정에 실패하였습니다");
+    }
     // 수정되고나서 사용자 화면이동(상세보기)
-    navigate(-1); // window.history.go(-1), 한페이지 전 화면을 보여줌
     // navigate(`list/1`); // list/1 을 보여줌, 하드코딩 => 이러면 현제 주소 뒤에 붙어서 무조건 절대경로 필수
     // navigate(`/list/1`); // list/1 을 보여줌, 하드코딩
   };

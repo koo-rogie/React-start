@@ -1,24 +1,32 @@
+import useAxiosInstance from "@hooks/useAxiosInstance";
 import type { TodoItem } from "@pages/TodoInfo";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 
 function TodoAdd() {
+  const axiosInstance = useAxiosInstance();
   const {
     register,
     handleSubmit,
     reset,
-    setFocus, 
+    setFocus,
     formState: { errors },
   } = useForm<TodoItem>();
 
-  const addTodo = (formData: TodoItem) => {
+  const addTodo = async (formData: TodoItem) => {
     console.log("API 서버에 등록 요청", formData);
-    //TODO API 서버에 등록 요청
+    try {
+      // 정상 사이트에 접근 할 경우에 나옴
+      await axiosInstance.post("/todolist", formData);
+      alert("할일이 등록 되었습니다.");
 
-    alert("할일이 등록 되었습니다.");
-
-    reset();
-    setFocus("title");
+      reset();
+      setFocus("title");
+    } catch (err) {
+      // 이미 삭제된 페이지에 접근 할 경우 나옴
+      console.error("할일 등록이 실패 되었습니다.", err);
+      alert("할일 등록이 실패 했습니다.");
+    }
   };
 
   return (
