@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 
 function TodoAdd() {
+  "use no memo";
   const axiosInstance = useAxiosInstance();
   const {
     register,

@@ -30,14 +30,21 @@ function TodoList() {
   };
 
   // 삭제 처리
-  const handleDelet = (_id: number) => {
-    // API 서버에 삭제 요청
+  const handleDelete = async (_id: number) => {
+    console.log("API 서버에 삭제 요청", _id);
 
-    console.log("API서버에 삭제 요청", _id);
-    alert(`${_id}번 삭제가 완료됐습니다 `);
+    try {
+      // API 서버에 삭제 요청
+      await axiosInstance.delete(`/todolist/${_id}`);
 
-    // API 서버에 목록 요창
-    fetchTodoList();
+      alert("삭제가 완료되었습니다.");
+
+      // API 서버에 목록 요청
+      fetchTodoList();
+    } catch (err) {
+      console.error(err);
+      alert("할일 삭제에 실패했습니다.");
+    }
   };
 
   // 부수효과때문에 hook사용
@@ -45,7 +52,7 @@ function TodoList() {
     fetchTodoList();
   }, []); // 빈 배열을 전달해서 마운트 시에만 실행
 
-  const itemList = data?.items.map((item) => <TodoListItem key={item._id} item={item} handleDelet={handleDelet} />);
+  const itemList = data?.items.map((item) => <TodoListItem key={item._id} item={item} handleDelete={handleDelete} />);
 
   return (
     <>
