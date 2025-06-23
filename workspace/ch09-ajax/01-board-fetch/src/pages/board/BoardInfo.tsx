@@ -13,7 +13,7 @@ function BoardInfo() {
     try {
       // 로딩 상태를 true로 지정
       setIsLoading(true);
-      const response = await fetch("https://fesp-api.koyeb.app/market/posts/2?delay=500", {
+      const response = await fetch("https://fesp-api.koyeb.app/market/posts/1?delay=500", {
         headers: {
           "client-id": "openmarket",
         }, // key value 쌍이니 객체로 만들어야함
@@ -56,7 +56,7 @@ function BoardInfo() {
             {data._id}. {data.title}
           </h2>
           <p>{data.content}</p>
-          <CommentList />
+          <CommentList replies={data.replies} />
         </>
       )}
     </>
