@@ -3,12 +3,13 @@
     "start": "live-server workspace --port=3000 --host=localhost"
   },
   "devDependencies": {
-    "@types/axios": "^0.9.36",
     "axios": "^1.10.0",
     "babel-plugin-react-compiler": "^19.1.0-rc.2",
     "live-server": "^1.2.2"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.81.2",
+    "@tanstack/react-query-devtools": "^5.81.2",
     "immer": "^10.1.1",
     "react-hook-form": "^7.57.0",
     "react-router": "^7.6.2"
