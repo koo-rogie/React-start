@@ -1,5 +1,5 @@
 import CommentList from "@/pages/board/CommentList";
-import type { BoardInfoType } from "@/types/boardType";
+import type { BoardInfoType } from "@/types/BoardType";
 import { useEffect, useState } from "react";
 
 function BoardInfo() {

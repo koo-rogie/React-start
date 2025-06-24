@@ -1,5 +1,6 @@
 import CommentNew from "@/pages/board/CommentNew";
-import type { ReplyType } from "@/types/boardType";
+import type { ReplyType } from "@/types/BoardType";
+
 interface PropsType {
   replies?: ReplyType[];
 }
