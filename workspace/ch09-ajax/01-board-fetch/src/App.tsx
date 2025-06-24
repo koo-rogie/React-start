@@ -1,10 +1,8 @@
 import BoardInfo from "@/pages/board/BoardInfo";
-
+import "./app.css";
 
 function App() {
-  return (
-    <BoardInfo />
-  );  
+  return <BoardInfo />;
 }
 
-export default App
+export default App;
