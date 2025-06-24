@@ -56,7 +56,7 @@ function BoardInfo() {
             {data._id}. {data.title}
           </h2>
           <p>{data.content}</p>
-          <CommentList replies={data.replies} />
+          <CommentList />
         </>
       )}
     </>

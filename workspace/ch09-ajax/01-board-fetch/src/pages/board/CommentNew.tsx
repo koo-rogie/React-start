@@ -12,7 +12,7 @@ function CommentNew() {
       await fetch("https://fesp-api.koyeb.app/market/posts/1/replies?delay=500", {
         headers: {
           "Client-Id": "openmarket",
-          "Content-Type": "application/json",
+          "Content-Type": "application/json", // 요청 body의 데이터 타입을 서버에 json이라고 알림.
         },
         method: "POST",
         body: JSON.stringify(jsonBody),

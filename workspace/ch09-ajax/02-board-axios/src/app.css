@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #333;
+  color: #ccc;
+}
+
+button {
+  border: none;
+  outline: none;
+}
+
+ul {
+  list-style: none;
+  li {
+    margin-left: 30px;
+    margin-block: 12px;
+  }
+}
+
+form {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  display: flex;
+  margin-inline: 10px;
+
+  textarea {
+    display: block;
+    width: 80%;
+  }
+}
