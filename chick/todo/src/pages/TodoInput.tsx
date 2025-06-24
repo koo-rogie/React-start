@@ -1,27 +1,26 @@
-import { useState, type KeyboardEvent } from "react";
-interface TodoInputProps {
-  addItem: (title: string) => void;
-}
-export default function TodoInput({ addItem }: TodoInputProps) {
-  const [data, setDate] = useState("");
+import { useState } from "react";
 
-  const handleAdd = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (title.trim() !== "") {
-      addItem(title);
-      setTitle("");
-    }
-    setDate(e.target.value);
+function TodoInput() {
+
+  console.log('### TodoInput 호출됨.');
+
+  // 제어 컴포넌트 1. state 정의
+  const [ title, setTitle ] = useState('');
+
+  // 추가 버튼 클릭 이벤트 처리
+  const handleAdd = () => {
+    console.log(`${title} 추가`);
+    
   };
-  const handleAddKeydown = (event: KeyboardEvent) => {
-    if (event.nativeEvent.isComposing) return; // 글자가 완성되지 않았을 경우 무시한다.(Mac 사용자)
-    if (event.key === "Enter") handleAdd();
-  };
+
   return (
     <div className="todoinput">
-      <input type="text" autoFocus value={data} onChange={handleAdd} onKeyDown={handleAddKeydown} />
-      <button type="button">추가</button>
-      <br />
-      <span>입력된 데이터: {data}</span>
+      {/* 제어 컴포넌트 2. value를 state로 지정 */}
+      {/* 제어 컴포넌트 3. onChange 이벤트에서 setState 호출 */}
+      <input type="text" value={ title } onChange={ e => setTitle(e.target.value) } autoFocus />
+      <button type="button" onClick={ handleAdd }>추가</button>
     </div>
   );
 }
+
+export default TodoInput;

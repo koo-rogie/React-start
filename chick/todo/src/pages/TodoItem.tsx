@@ -1,27 +1,28 @@
-import { useState } from "react";
-
-interface itemListItem {
+export interface TodoItem {
   _id: number;
   title: string;
   done: boolean;
 }
 
-interface Props {
-  item: itemListItem;
+interface TodoItemProps {
+  item: TodoItem;
+  deleteItem: (_id: number) => void;
 }
-export default function TodoItem({ item }: Props) {
-  const [data, setData] = useState(false);
 
-  const onClicks = () => {
-    setData(!data);
-    console.log("클릭됨");
+function TodoItem({ item, deleteItem }: TodoItemProps) {
+
+  const handleDelete = (_id: number) => {
+    console.log(_id, '삭제 요청.');
+    deleteItem(_id);
   };
 
   return (
-    <li className={`${item._id}`}>
-      <span>{item._id}</span>
-      <span onClick={onClicks}>{data ? <s>{item.title}</s> : item.title}</span>
-      <button type="button">삭제</button>
+    <li>
+      <span>{ item._id }</span>
+      <span><s>{ item.title }</s></span>
+      <button type="button" onClick={ () => handleDelete(item._id) }>삭제</button>
     </li>
   );
 }
+
+export default TodoItem;
