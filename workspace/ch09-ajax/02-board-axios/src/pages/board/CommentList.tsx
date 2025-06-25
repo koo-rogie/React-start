@@ -18,18 +18,12 @@ function CommentList() {
 
   // API 서버에 1번 게시물의 댓글 목록을 fetch() 요청으로 보낸다.
   const requestCommentList = async () => {
-    // 작업에 실패하면 자동으로 재시도하기
-    // - chtch블럭에서 지정한 횟수만큼 requestCommentList() 호출, useRef
-
-    // 다른 탭이나 앱에서 작업 후에 돌아오면 데이터 자동으로 갱신하기
-    // document에 visiblitychnge 이벤트로 브라우저의 가시성 반경을 감지함
-    // window에 foucs이벤트로 브라우저 탭의 포커스를 감지해서 requestCommentList() 호출
-
-    // 일정시간동안은 캐시에서 서버 호출 횟수 줄이기
-    // 캐시 관련 로직 작성
-
-    // 주기적으로 호출해서 데이터를 자동으로 갱신하기
-    // setInterval() 함수로 일정 시간마다 requestCommentList() 호출
+    // TODO 작업이 실패하면 자동으로 재시도하기(catch 블럭에서 지정한 횟수만큼 requestCommentList() 호출)
+    // TODO 다른탭이나 앱에서 작업 후에 돌아오면 데이터 자동으로 갱신하기
+    //      - document에 visibilitychange 이벤트로 브라우저의 가시성 변경을 감지.
+    //      - window에 focus 이벤트로 브라우저 탭의 포커스 변경을 감지해서 requestCommentList() 호출)
+    // TODO 일정 시간동안은 캐시해서 서버 호출 횟수 줄이기(캐시 관련 로직 작성)
+    // TODO 주기적으로 호출해서 데이터를 자동으로 갱신하기(setInterval() 함수로 일정 시간마다 requestCommentList() 호출)
 
     try {
       // 로딩 상태를 true로 지정
