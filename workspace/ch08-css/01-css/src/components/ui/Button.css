@@ -13,20 +13,49 @@
   border-radius: 6px;
 }
 
-/* 파란 배경의 빨간 글자 */
-.bg-blue-text-red{
-  background-color: blue;
-  color: red;
+/* 블루 버튼 - 세련된 네온 느낌 */
+.bg-blue-text-red {
+  background-color: #1e3a8a; /* 인디고 블루 */
+  color: #f87171; /* 연한 레드 */
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(30, 58, 138, 0.3);
+  transition: all 0.3s ease;
+}
+.bg-blue-text-red:hover {
+  background-color: #3b82f6;
+  transform: translateY(-2px);
 }
 
-/* 노란 배경의 빨간 글자 */
-.bg-yellow-text-red{
-  background-color: yellow;
-  color: red;
+/* 옐로 버튼 - 귀엽고 밝은 느낌 */
+.bg-yellow-text-red {
+  background-color: #fde047; /* 밝은 노랑 */
+  color: #dc2626; /* 강한 레드 */
+  font-weight: bold;
+  padding: 10px 24px;
+  border-radius: 8px;
+  box-shadow: inset 0 -2px 0 #facc15;
+  transition: all 0.2s ease-in-out;
+}
+.bg-yellow-text-red:hover {
+  background-color: #fef08a;
+  transform: scale(1.03);
 }
 
-/* 회색 배경의 파란 글자 */
-.bg-gray-text-blue{
-  background-color: lightgray;
-  color: darkblue;
+/* 그레이 버튼 - 고급스러운 느낌 */
+.bg-gray-text-blue {
+  background: linear-gradient(to bottom, #f3f4f6, #d1d5db);
+  color: #1d4ed8;
+  font-weight: 500;
+  padding: 10px 24px;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid #cbd5e1;
+  transition: all 0.25s ease;
 }
+.bg-gray-text-blue:hover {
+  background: linear-gradient(to bottom, #e5e7eb, #cbd5e1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
