@@ -11,11 +11,13 @@
     "start": "live-server workspace --port=3000 --host=localhost"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.1.10",
     "axios": "^1.10.0",
     "babel-plugin-react-compiler": "^19.1.0-rc.2",
     "live-server": "^1.2.2",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "tailwindcss": "^4.1.10"
   },
   "dependencies": {
     "@eslint/js": "^9.25.0",
@@ -35,6 +37,7 @@
     "react-redux": "^9.2.0",
     "react-router": "^7.6.2",
     "redux": "^5.0.1",
+    "styled-components": "^6.1.19",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
     "vite": "^6.3.5",
