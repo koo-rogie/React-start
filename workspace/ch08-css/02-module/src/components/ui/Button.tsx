@@ -1,14 +1,16 @@
-interface ButtonProps {
-  children: string;
-  type?: "button" | "submit" | "reset";
+import styles from "./Button.module.css";
+
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   color?: string;
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  bg?: string;
 }
 
-function Button({ children, type="button", color, onClick: handleClick }: ButtonProps){
+function Button({ children, bg, color, ...rest }: ButtonProps) {
   return (
-    <button type={ type } onClick={ handleClick } style={{ backgroundColor: color }} className="rounded-button">{ children }</button>
-  );
+    <button className={`${styles.button} ${styles[`bg-${bg}-text-${color}`]} `} {...rest} onClick={() => console.log({ children })}>
+      {children}
+    </button>
+  ); // ...rest 기존 버튼의 속성들을 전개 연산자로 받아옴
 }
 
 export default Button;
