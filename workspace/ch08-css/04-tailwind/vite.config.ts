@@ -1,10 +1,12 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
-    react()
+    react(), // 리엑트
+    tailwindcss(), // 테일윈드
   ],
   resolve: {
     alias: [
@@ -21,4 +23,4 @@ export default defineConfig({
       { find: "@zustand", replacement: "/src/zustand" },
     ],
   },
-})
+});
