@@ -1,9 +1,5 @@
 import { NavLink } from "react-router";
 
-interface isActive {
-  isActive: string;
-}
-
 function Header() {
   return (
     <header>
@@ -12,17 +8,17 @@ function Header() {
         <div>
           <ul>
             <li>
-              <NavLink className={({ isActive }: isActive) => (isActive ? "menu-bark" : "menu")} to="/">
+              <NavLink className={({ isActive }) => (isActive ? "menu-bark" : "menu")} to="/">
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink className={({ isActive }: isActive) => (isActive ? "menu-bark" : "menu")} to="/about">
+              <NavLink className={({ isActive }) => (isActive ? "menu-bark" : "menu")} to="/about">
                 About
               </NavLink>
             </li>
             <li>
-              <NavLink className={({ isActive }: isActive) => (isActive ? "menu-bark" : "menu")} to="/list">
+              <NavLink className={({ isActive }) => (isActive ? "menu-bark" : "menu")} to="/list">
                 TodoList
               </NavLink>
             </li>
