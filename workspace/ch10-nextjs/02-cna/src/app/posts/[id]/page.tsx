@@ -23,4 +23,6 @@ export default async function InfoPage({ params }: { params: { id: string } }) {
   ]
   */
   return <h1>상세 조회 - {pageParams.id}번 게시물</h1>;
+  // 배열의 index 0번을 뽑아옴
+  // 폴더 명이 [...id]였을때 가능했음
 }
