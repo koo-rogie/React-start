@@ -29,8 +29,16 @@ export function generateStaticParams() {
 
 export default async function InfoPage({ params }: { params: Promise<{ id: string }> }) {
   const pageParams = await params;
-  console.log("pageParams", pageParams);
 
-  await new Promise((resolve) => [setTimeout(resolve, 1000 * 2)]);
-  return <h1>상세 조회 - {pageParams.id}번 게시물</h1>;
+  const res = await fetch(`http://localhost:3000/api/posts/${pageParams.id}`);
+
+  const data = await res.json();
+
+  return (
+    <>
+      <p className="text-gray-500 text-[12px]">상세 조회 - {pageParams.id}번 게시물</p>
+      <h1 className="text-3xl font-bold my-2">제목: {data.item.title}</h1>
+      <p>내용: {data.item.content}</p>
+    </>
+  );
 }
