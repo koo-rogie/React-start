@@ -19,16 +19,22 @@ function TodoItem({ item, fetchList }: TodoItemProps) {
 
     try {
       await axiosInstance.delete(`/todolist/${item._id}`);
-      fetchList(); // 여기 지워야함...ㅋㅋㅋ
+      fetchList();
     } catch (err) {
-      alert(err);
+      console.error(err);
     }
+  };
+
+  const toggleDone = async (_id: number) => {
+    console.log(_id, "toggle 요청.");
+    // TODO 완성하세요.
+
   };
 
   return (
     <li>
       <span>{item._id}</span>
-      <span onClick={() => fetchList()}>{item.done ? <s>{item.title}</s> : item.title}</span>
+      <span onClick={() => toggleDone(item._id)}>{item.done ? <s>{item.title}</s> : item.title}</span>
       <button type="button" onClick={() => handleDelete(item._id)}>
         삭제
       </button>
