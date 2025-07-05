@@ -10,6 +10,12 @@ export async function fetchPosts(): Promise<Post[]> {
     headers: {
       "Client-Id": "openmarket",
     },
+    next: {
+      tags: ["list"],
+      revalidate: 10, // value값이 지날때 마다 리렌더링
+    },
+    // cache: "no-cache", // next 15 기본값
+    cache: "force-cache", // next 14 기본값(평생 캐시 됨)
   });
 
   const data = await res.json();

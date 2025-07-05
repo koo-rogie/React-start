@@ -2,6 +2,8 @@
 "use server";
 
 import { PostInfoRes } from "@/types/board";
+import { revalidatePath, revalidateTag } from "next/cache";
+import { redirect } from "next/navigation";
 
 // 게시글 등록
 export default async function createPost(prevState: PostInfoRes, formData: FormData) {
@@ -20,5 +22,11 @@ export default async function createPost(prevState: PostInfoRes, formData: FormD
     },
   });
   const data = await res.json();
+  if (data.ok) {
+    revalidatePath("/posts"); // 서버 캐시를 무효화하여 /posts 페이지를 다음 요청 시 최신 데이터로 렌더링
+    revalidateTag("list");
+    redirect("/posts"); // 클라이언트에게 /posts 페이지로 이동하도록 리다이렉트
+  }
+
   return data;
 }
