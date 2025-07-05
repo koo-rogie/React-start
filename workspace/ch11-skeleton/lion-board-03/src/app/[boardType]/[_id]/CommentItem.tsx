@@ -1,22 +1,31 @@
+import { PostReply } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function CommentItem() {
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID || "";
+
+export default function CommentItem({ reply }: { reply: PostReply }) {
   return (
     <div className="shadow-md rounded-lg p-4 mb-4">
       <div className="flex justify-between items-center mb-2">
         <div className="flex items-center">
-          <Image width="32" height="32" className="w-8 mr-2 rounded-full" src="https://fesp-api.koyeb.app/market/files/openmarket/user-muzi.png" alt="어피치 프로필 이미지" />
+          {/* 프로필 이미지 시작 */}
+          {reply.user.image && <Image className="w-8 mr-2 rounded-full" src={`${API_URL}/files/${CLIENT_ID}/${reply.user.image}`} alt={`${reply.user.name} 프로필 이미지`} width="32" height="32" />}
+          {/* 프로필 이미지 종료 */}
+
+          {/* 닉네임 시작 */}
           <Link href="" className="text-orange-400">
-            어피치
+            {reply.user.name}
           </Link>
+          {/* 닉네임 종료 */}
         </div>
-        <time className="text-gray-500" dateTime="2025.06.30 14:11:22">
-          2025.06.30 14:11:22
+        <time className="text-gray-500" dateTime={reply.createdAt}>
+          {reply.createdAt}
         </time>
       </div>
       <div className="flex justify-between items-start mb-2">
-        <p className="whitespace-pre-wrap text-sm flex-1">아는 내용이구만...</p>
+        <p className="whitespace-pre-wrap text-sm flex-1">{reply.content}</p>
         <form action="#" className="inline ml-2">
           <button type="submit" className="bg-red-500 py-1 px-2 text-sm text-white font-semibold ml-2 hover:bg-amber-400 rounded">
             삭제
