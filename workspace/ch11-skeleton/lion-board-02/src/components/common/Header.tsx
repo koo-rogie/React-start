@@ -8,7 +8,7 @@ export default function Header() {
         <div className="w-1/2 order-1 md:w-auto">
           <Link href="/" className="flex items-center gap-2">
             <Image className="mr-3 h-6 w-auto sm:h-9" src="/images/favicon.svg" width="32" height="32" alt="로고 이미지" />
-            <span className="text-lg font-bold">라이언 보드</span>
+            <span className="text-lg font-bold">라이언 보드 v.02 </span>
           </Link>
         </div>
         <div className="w-auto order-2 text-base mt-4 md:mt-0">
