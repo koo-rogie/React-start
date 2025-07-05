@@ -1,9 +1,12 @@
 import ListItem from "@/app/[boardType]/ListItem";
 import Link from "next/link";
 import { Metadata } from "next";
+import { getPosts } from "@/data/functions/post";
+import { Post } from "@/types";
 
 export async function generateMetadata({ params }: ListPageProps): Promise<Metadata> {
   const { boardType } = await params;
+  
   return {
     title: `${boardType} - Lion Board`,
     description: `${boardType} 게시판입니다.`,
@@ -26,6 +29,7 @@ export interface ListPageProps {
 
 export default async function ListPage({ params }: ListPageProps) {
   const { boardType } = await params;
+  const res = await getPosts(boardType);
   let boardTitle = "";
   switch (boardType) {
     case "info":
@@ -75,10 +79,7 @@ export default async function ListPage({ params }: ListPageProps) {
               <th className="p-2 whitespace-nowrap font-semibold hidden sm:table-cell">작성일</th>
             </tr>
           </thead>
-          <tbody>
-            <ListItem boardType={boardType} />
-            <ListItem boardType={boardType} />
-          </tbody>
+          <tbody>{res.ok ? res.item.map((post: Post) => <ListItem key={post._id} boardType={boardType} post={post} />) : <p>{res.message}</p>}</tbody>
         </table>
         <hr />
 
